@@ -1,0 +1,18 @@
+{
+  "name": "stripe-payment",
+  "version": "1.0.0",
+  "description": "Stripe payment integration for Rydhaan",
+  "main": "payment.js",
+  "scripts": {
+    "start": "node payment.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "stripe": "^12.18.0"
+  },
+  "keywords": []
+}

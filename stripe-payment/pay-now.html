@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting to Stripe...</title>
+</head>
+<body>
+  <p>Redirecting to payment gateway...</p>
+
+  <script>
+    // Get cart items from localStorage
+    const cart = JSON.parse(localStorage.getItem("cart"));
+
+    if (!cart || cart.length === 0) {
+      alert("Your cart is empty. Please add items before checkout.");
+      window.location.href = "../index.html"; // redirect to homepage or products page
+    } else {
+      fetch("", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartItems: cart })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.url) {
+          // Redirect user to Stripe Checkout
+          window.location.href = data.url;
+        } else {
+          alert("Stripe session creation failed. Try again.");
+        }
+      })
+      .catch(err => {
+        console.error("Stripe error:", err);
+        alert("Payment initiation failed. Try again.");
+      });
+    }
+  </script>
+</body>
+</html>
