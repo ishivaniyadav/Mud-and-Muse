@@ -15,12 +15,12 @@
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert("Payment failed");
+        alert("Stripe checkout failed");
       }
     })
     .catch(err => {
       console.error(err);
-      alert("Stripe error");
+      alert("Payment error");
     });
   }
 </script>

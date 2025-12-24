@@ -8,7 +8,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
 app.use(express.static(__dirname));
 
 app.get("/", (req, res) => {
@@ -34,20 +33,20 @@ app.post("/create-checkout-session", async (req, res) => {
       quantity: item.quantity || 1
     }));
 
-    const DOMAIN = `https://${process.env.RENDER_EXTERNAL_HOSTNAME}`;
+    const DOMAIN = "https://mud-and-muse.onrender.com";
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `${DOMAIN}/stripe-payment/success.html`,
-      cancel_url: `${DOMAIN}/stripe-payment/cancel.html`
+      success_url: `${DOMAIN}/success.html`,
+      cancel_url: `${DOMAIN}/cancel.html`
     });
 
     res.json({ url: session.url });
 
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Stripe session failed" });
   }
 });
