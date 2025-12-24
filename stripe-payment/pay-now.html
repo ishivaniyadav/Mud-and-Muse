@@ -5,7 +5,7 @@
     alert("Cart is empty");
     window.location.href = "../index.html";
   } else {
-    fetch("https://YOUR-RENDER-APP.onrender.com/create-checkout-session", {
+    fetch("/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ cartItems: cart })
@@ -15,12 +15,12 @@
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert("Stripe checkout failed");
+        alert("Payment failed");
       }
     })
     .catch(err => {
       console.error(err);
-      alert("Payment error");
+      alert("Stripe error");
     });
   }
 </script>
